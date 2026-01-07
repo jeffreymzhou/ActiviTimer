@@ -28,6 +28,10 @@ struct MainView: View {
                 .tabItem{
                     Label("Summary", systemImage: "house")
                 }
+            TaskTimersListViewV2()
+                .tabItem{
+                    Label("v2", systemImage: "house")
+                }
             ProfileView()
                 .tabItem{
                     Label("Profile", systemImage: "person.circle")

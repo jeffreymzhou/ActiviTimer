@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import SwiftData
 
 struct TaskTimer : Codable, Identifiable, Equatable {
     let id: String
@@ -53,5 +54,60 @@ struct TaskTimer : Codable, Identifiable, Equatable {
             .collection("tasks")
             .document(id)
             .setData(self.asDictionary())
+    }
+}
+
+@Model
+class TaskTimerV2: Identifiable, CloudSyncable {
+    var collection: FirestoreCollectionEnum = FirestoreCollectionEnum.taskTimers
+    @Attribute(.unique) var id: String
+    var title: String
+    var isActive: Bool
+    var startTime: TimeInterval
+    var createdDate: TimeInterval
+    var updatedDate: TimeInterval
+    
+    init(id: String, title: String, isActive: Bool = false, startTime: TimeInterval = 0, createdDate: TimeInterval = 0, updatedDate: TimeInterval = 0) {
+        self.id = id
+        self.title = title
+        self.isActive = isActive
+        self.startTime = startTime
+        self.createdDate = createdDate
+        self.updatedDate = updatedDate
+    }
+    
+    // Convert to Firestore-friendly dictionary
+    func toDictionary() -> [String: Any] {
+        return [
+            "id": id,
+            "title": title,
+            "isActive": isActive,
+            "startTime": startTime,
+            "createdDate": createdDate,
+            "updatedDate": updatedDate,
+        ]
+    }
+    
+    // Create TaskTimer from Firestore dictionary
+    static func fromDictionary(_ dict: [String: Any]) -> TaskTimerV2? {
+        guard
+            let id = dict["id"] as? String,
+            let title = dict["title"] as? String,
+            let isActive = dict["isActive"] as? Bool,
+            let startTime = dict["startTime"] as? TimeInterval,
+            let createdDate = dict["createdDate"] as? TimeInterval,
+            let updatedDate = dict["updatedDate"] as? TimeInterval
+        else {
+            return nil
+        }
+        
+        return TaskTimerV2(
+            id: id,
+            title: title,
+            isActive: isActive,
+            startTime: startTime,
+            createdDate: createdDate,
+            updatedDate: updatedDate
+        )
     }
 }

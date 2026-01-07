@@ -8,10 +8,13 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import SwiftUI
 
 class NewTaskItemViewViewModel: ObservableObject {
     @Published var title = ""
     @Published var showAlert = false
+    
+//    @Environment(\.modelContext) private var context
     
     init() {}
     
@@ -46,7 +49,18 @@ class NewTaskItemViewViewModel: ObservableObject {
             .setData(newItem.asDictionary())
         
     }
-    
+//    
+//    func saveLocal() {
+//        print("saving new task \(title) to local SwiftData context")
+//        var newTaskTimer = TaskTimerV2(
+//            id: UUID().uuidString,
+//            title: title,
+//            isActive: false,
+//            createdDate: Date().timeIntervalSince1970,
+//            updatedDate: Date().timeIntervalSince1970)
+//        context.insert(newTaskTimer)
+//    }
+//    
     var canSave: Bool {
         guard !title.trimmingCharacters(in: .whitespaces).isEmpty else {
             return false

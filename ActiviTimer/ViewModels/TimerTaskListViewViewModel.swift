@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import SwiftUI
 
 class TaskTimerListViewViewModel: ObservableObject {
     @Published var showingNewTaskTimerView = false;

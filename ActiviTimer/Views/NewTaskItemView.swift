@@ -26,7 +26,8 @@ struct NewTaskItemView: View {
                 TLButton(title: "Save",
                          background: .pink) {
                     if viewModel.canSave {
-                        viewModel.save()
+                        newTask = TaskTimerV2(title: viewModel.title, dueDate: viewModel.dueDate)
+                        saveTaskLocalCallback()
                         visible = false
                     } else {
                         viewModel.showAlert = true
