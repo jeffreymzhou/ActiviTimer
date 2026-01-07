@@ -7,9 +7,10 @@
 
 import FirebaseCore
 import SwiftUI
+import SwiftData
 
 @main
-struct ToDoListApp: App {
+struct ActivitimerApp: App {
     init() {
         FirebaseApp.configure()
     }
@@ -17,5 +18,6 @@ struct ToDoListApp: App {
         WindowGroup {
             MainView()
         }
+        .modelContainer(for: TaskTimerV2.self)
     }
 }

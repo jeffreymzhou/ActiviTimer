@@ -42,8 +42,8 @@ struct TimeSegmentListView: View {
     }
 }
 
-//struct TimerTaskListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TaskTimerListView(userId: "Ob1mIAlkElam46mu24bllKBhsvo2")
-//    }
-//}
+struct TimeSegmentListView_Previews: PreviewProvider {
+    static var previews: some View {
+        TimeSegmentListView(userId: "CwpXydMQ49N2ZwmlNgWvx0Nkdbu1")
+    }
+}
